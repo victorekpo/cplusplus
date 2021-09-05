@@ -1,0 +1,218 @@
+What is C++ Vector: STL Basics
+Source: https://www.bitdegree.org/learn/c-plus-plus-vector
+
+Vector is a template class in STL (Standard Template Library) of C++ programming language. C++ vectors are sequence containers that store elements.
+
+Specifically used to work with dynamic data, C++ vectors may expand depending on the elements they contain. That makes it different from a fixed-size array.
+
+C++ vectors can automatically manage storage. It is efficient if you add and delete data often. Bear in mind however, that a vector might consume more memory than an array.
+
+Why Use Vectors in C++
+Vectors C++ are preferable when managing ever-changing data elements.
+
+It is handy if you don’t know how big the data is beforehand since you don’t need to set the maximum size of the container. Since it’s possible to resize C++ vectors, it offers better flexibility to handle dynamic elements.
+
+C++ vectors offer excellent efficiency. It is a template class, which means no more typing in the same code to handle different data.
+
+If you use vectors, you can copy and assign other vectors with ease. There are different ways to do that: using the iterative method, assignment operator =, an in-built function, or passing vector as a constructor.
+
+In C++ vectors, automatic reallocation happens whenever the total amount of memory is used. This reallocation relates to how size and capacity function works.
+
+How to Create C++ Vectors
+Vectors in C++ work by declaring which program uses them. The common syntax look like this:
+
+vector <type> variable (elements)
+
+For example:
+
+vector <int> rooms (9);
+
+Let's break it down:
+
+type defines a data type stored in a vector (e.g., <int>, <double> or <string>)
+variable is a name that you choose for the data
+elements specified the number of elements for the data
+It is mandatory to determine the type and variable name. However, the number of elements is optional.
+
+Basically, all the data elements are stored in contiguous storage. Whenever you want to access or move through the data, you can use iterators.
+
+The data elements in C++ vectors are inserted at the end. Use modifiers to insert new elements or delete existing ones.
+
+Iterators
+An iterator allows you to access the data elements stored within the C++ vector. It is an object that functions as a pointer. There are five types of iterators in C++: input, output, forward, bidirectional, and random access.
+
+C++ vectors support random access iterators. Here are a few function you may use with iterators for C++ vectors:
+
+vector::begin() returns an iterator to point at the first element of a C++ vector.
+vector::end() returns an iterator to point at past-the-end element of a C++ vector.
+vector::cbegin() is similar to vector::begin(), but without the ability to modify the content.
+vector::cend() issimilar to vector::end() but can’t modify the content.
+
+Modifiers
+As its name suggests, you can use a modifier to change the meaning of a specified type of data. Here are some modifiers you can use in C++ vectors:
+
+vector::push_back() pushes elements from the back.
+vector::insert() inserts new elements to a specified location.
+vector::pop_back() removes elements from the back.
+vector::erase() removes a range of elements from a specified location.
+vector::clear() removes all elements.
+
+Breaking It Down With Examples
+There are many ways to initialize C++ vectors. You can use them depending on your preferences or the size of your data.
+
+Start with default value
+Example
+#include <iostream>
+#include <string>
+#include <vector>
+
+int main() {
+    // Vector with 5 integers
+    // Default value of integers will be 0.
+    std::vector < int >
+        vecOfInts(5);
+    for (int x: vecOfInts)
+        std::cout << x << std::endl;
+}
+
+Start with an array
+Example
+#include <iostream>
+#include <string>
+#include <vector>
+
+int main() {
+    // Array of string objects
+    std::string arr[] = {
+        "first",
+        "sec",
+        "third",
+        "fourth"
+    };
+
+    // Vector with a string array
+    std::vector < std::string > vecOfStr(arr,
+        arr +
+        sizeof(arr) / sizeof(std::string));
+    for (std::string str: vecOfStr)
+        std::cout << str << std::endl;
+}
+
+Start with a list
+Example
+#include <iostream>
+#include <string>
+#include <vector>
+#include <list>
+
+int main() {
+    // std::list of 5 string objects
+    std::list < std::string > listOfStr;
+    listOfStr.push_back("first");
+    listOfStr.push_back("sec");
+    listOfStr.push_back("third");
+    listOfStr.push_back("fouth");
+    // Vector with std::list
+    std::vector < std::string > vecOfStr(listOfStr.begin(), listOfStr.end());
+    for (std::string str: vecOfStr)
+        std::cout << str << std::endl;
+}
+
+Start by copying from another vector
+Example
+#include <iostream>
+#include <string>
+#include <vector>
+
+int main() {
+    std::vector < std::string > vecOfStr;
+    vecOfStr.push_back("first");
+    vecOfStr.push_back("sec");
+    vecOfStr.push_back("third");
+    // Vector with other string object
+    std::vector < std::string > vecOfStr3(vecOfStr);
+}
+
+When using certain initialization, you might need to set the size of the vector. Size refers to the number of elements a vector contains. It is not the same as capacity, which is the maximum number of elements a vector can contain.
+
+To manage it, you can use size() function:
+
+Example
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int main() {
+    vector <int> v {
+        1,
+        2,
+        3,
+        4,
+        5
+    };
+    int n = v.size();
+    cout << "Size of the vector is :" << n;
+}
+
+You can also use the max_size() function like this:
+
+Example
+#include <iostream>
+#include<vector>
+
+using namespace std;
+
+int main() {
+    vector <int> v {
+        1,
+        2,
+        3,
+        4,
+        5
+    };
+    std::cout << v.max_size() << std::endl;
+}
+
+Most of the time, you will need to access a specified element in a C++ vector. To do that, you can use the [] selector function as shown below:
+
+Example
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int main() {
+    vector <int> v {
+        1,
+        2,
+        3,
+        4,
+        5
+    };
+    for (int i = 0; i < v.size(); i++)
+        cout << v.operator[](i) << " ";
+}
+
+If you want to replace a certain value with a new one, you can use = operator:
+
+Example
+#include<iostream>
+#include<vector>
+
+using namespace std;
+int main() {
+    vector <char> v {
+        'C',
+        '#'
+    };
+    vector <char> v1;
+    v1.operator = (v);
+    for (int i = 0; i < v.size(); i++)
+        std::cout << v[i];
+}
+
+C++ Vector: Useful Tips
+It is recommended to use C++ vector if your data elements are not predetermined.
+As a template class, C++ vectors offer better efficiency and reusability.
+Compared to arrays, there are more ways to copy vectors in C++.
